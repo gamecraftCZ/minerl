@@ -154,6 +154,11 @@ def build_minecraft(source_dir, build_dir):
 # Don't build binaries (requires Java) on readthedocs.io server.
 if os.environ.get("READTHEDOCS"):
     cmdclass = {}
+elif os.environ.get("MINERL_DATASET_BUILD_ONLY"):
+    cmdclass = {
+        'bdist_wheel': bdist_wheel,
+        'install': InstallPlatlib,
+    }
 else:
     cmdclass = {
         'bdist_wheel': bdist_wheel,
